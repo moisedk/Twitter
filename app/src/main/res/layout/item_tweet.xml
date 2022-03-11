@@ -16,21 +16,26 @@
 
     <TextView
         android:id="@+id/tvUsername"
-        android:textStyle="bold"
-        android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Moise DK" />
 
     <TextView
-        android:id="@+id/tvTweet"
-        android:textSize="16dp"
+        android:id="@+id/tvTweetBody"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="16dp"
+        app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-        tools:text="Legend says the person who created the twitter app does not allow their kids to use it" />
+        tools:text="e it" />
 </androidx.constraintlayout.widget.ConstraintLayout>
