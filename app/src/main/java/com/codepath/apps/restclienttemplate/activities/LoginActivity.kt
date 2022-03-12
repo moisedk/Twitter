@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate
+package com.codepath.apps.restclienttemplate.activities
 
 import android.content.Intent
 import android.os.AsyncTask
