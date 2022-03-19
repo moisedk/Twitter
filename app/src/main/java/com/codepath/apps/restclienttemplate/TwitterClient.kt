@@ -58,8 +58,12 @@ class TwitterClient(context: Context) : OAuthBaseClient(
         params["max_id"] = id
         client.get(apiUrl, params, handler)
     }
-
-
+    fun publishTweet(tweetContent: String, handler: JsonHttpResponseHandler, id: String = MAX_ID) {
+        val apiUrl = getApiUrl("statuses/update.json")
+        val params = RequestParams()
+        params["status"] = tweetContent
+        client.post(apiUrl, params, " ",  handler)
+    }
 
 
 }

@@ -22,6 +22,7 @@ import org.json.JSONException
 
 
 private const val TAG = "TimelineActivity"
+private const val REQUEST_CODE = 1
 class TimelineActivity : AppCompatActivity() {
     private lateinit var scRefresher: SwipeRefreshLayout
     private lateinit var rvTweets: RecyclerView
@@ -124,7 +125,17 @@ class TimelineActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.compose)
-            startActivity(Intent(this, ComposeActivity::class.java))
+            startActivityForResult(Intent(this, ComposeActivity::class.java), REQUEST_CODE)
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            tweets.add(0, data?.getParcelableExtra("TWEET") as Tweet)
+            adapter.notifyItemRangeInserted(0, 1)
+            rvTweets.smoothScrollToPosition(0)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+
     }
 }
