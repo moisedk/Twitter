@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate
+package com.codepath.apps.restclienttemplate.activities
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import com.codepath.apps.restclienttemplate.R
+import com.codepath.apps.restclienttemplate.TwitterApplication
+import com.codepath.apps.restclienttemplate.TwitterClient
 import com.codepath.apps.restclienttemplate.models.Model
 import com.codepath.apps.restclienttemplate.models.ModelDao
 import com.codepath.oauth.OAuthLoginActionBarActivity
@@ -19,7 +22,7 @@ class LoginActivity : OAuthLoginActionBarActivity<TwitterClient>() {
         setContentView(R.layout.activity_login)
         val model = Model()
         model.name = "CodePath"
-        modelDao = (applicationContext as TwitterApplication).myDatabase?.sampleModelDao()
+        modelDao = (applicationContext as TwitterApplication).appDatabase?.sampleModelDao()
         AsyncTask.execute { modelDao?.insertModel(model) }
     }
 

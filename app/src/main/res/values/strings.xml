@@ -5,5 +5,9 @@
     <string name="login_label">Log in</string>
     <string name="intent_scheme">oauth</string>
     <string name="intent_host">cprest</string>
+    <string name="username">Username</string>
+    <string name="screen_name">\@ %s</string>
+    <string name="time_stamp"> . %s</string>
+    <string name="char_count">%s/280</string>
 
 </resources>
