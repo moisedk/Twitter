@@ -1,6 +1,5 @@
 package com.codepath.apps.restclienttemplate.models.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codepath.apps.restclienttemplate.R
 import com.codepath.apps.restclienttemplate.models.Tweet
+import com.codepath.apps.restclienttemplate.utils.TimeFormatter
 
 class RecyclerAdapter(private val tweets: ArrayList<Tweet>): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
@@ -17,14 +17,21 @@ class RecyclerAdapter(private val tweets: ArrayList<Tweet>): RecyclerView.Adapte
         private val tvUsername: TextView = view.findViewById(R.id.tvUsername)
         private val tvTweetBody: TextView = view.findViewById(R.id.tvTweetBody)
         private val ivProfile: ImageView = view.findViewById(R.id.ivProfileImage)
+        private val tvTimeStamp: TextView = view.findViewById(R.id.tvTimeStamp)
+        private val tvScreenName: TextView = view.findViewById(R.id.tvScreenName)
+        private val ivVerifiedBadge: ImageView = view.findViewById(R.id.ivVerifiedBadge)
 
         fun bind(tweet: Tweet) {
             tvUsername.text = tweet.user?.name
             tvTweetBody.text = tweet.body
+            tvScreenName.text = itemView.context.getString(R.string.screen_name, tweet.user?.screenName)
+            tvTimeStamp.text = itemView.context.getString(R.string.time_stamp, TimeFormatter.getTimeDifference(tweet.createdAt))
+            if (tweet.user!!.verified){
+                ivVerifiedBadge.setImageResource(R.drawable.verified_badge)
+            }
             Glide.with(itemView.context)
                 .load(tweet.user?.publicImageUrl)
                 .into(ivProfile)
-
         }
 
     }
@@ -46,11 +53,7 @@ class RecyclerAdapter(private val tweets: ArrayList<Tweet>): RecyclerView.Adapte
     fun clear() {
         tweets.clear()
         notifyDataSetChanged()
+
     }
 
-    // Add a list of items -- change to type used
-    fun addAll(tweetList: List<Tweet>) {
-        tweets.addAll(tweetList)
-        notifyDataSetChanged()
-    }
 }

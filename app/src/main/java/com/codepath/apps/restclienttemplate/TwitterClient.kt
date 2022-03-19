@@ -1,12 +1,11 @@
 package com.codepath.apps.restclienttemplate
 
 import android.content.Context
+import android.util.Log
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.codepath.oauth.OAuthBaseClient
-import com.github.scribejava.apis.FlickrApi
 import com.github.scribejava.apis.TwitterApi
-import com.github.scribejava.core.builder.api.BaseApi
 
 /*
  *
@@ -32,6 +31,9 @@ class TwitterClient(context: Context) : OAuthBaseClient(
 ) {
 
     companion object {
+        // This initial id ensures that we get the most recent tweets
+        const val MAX_ID: String = 4502437679610449926.toString()
+
         val REST_API_INSTANCE: TwitterApi = TwitterApi.instance()
 
         const val REST_URL = "https://api.twitter.com/1.1"
@@ -48,22 +50,16 @@ class TwitterClient(context: Context) : OAuthBaseClient(
             "intent://%s#Intent;action=android.intent.action.VIEW;scheme=%s;package=%s;S.browser_fallback_url=%s;end"
     }
     // To populate the user's home timeline with tweets fetched from the twitter api
-    fun getHomeTimeline(handler: JsonHttpResponseHandler) {
+    fun getHomeTimeline(handler: JsonHttpResponseHandler, id: String = MAX_ID) {
         val apiUrl = getApiUrl("statuses/home_timeline.json")
         // Can specify query string params directly or through RequestParams.
         val params = RequestParams()
-        params["format"] = "json"
-        params["count"] = "50"
-        params["since_id"] = "1"
+        Log.d("Tag", "getHomeTimeline: $MAX_ID")
+        params["max_id"] = id
         client.get(apiUrl, params, handler)
     }
 
-    /* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
-	 * 	  i.e getApiUrl("statuses/home_timeline.json")
-	 * 2. Define the parameters to pass to the request (query or body)
-	 *    i.e val params = RequestParams("foo", "bar")
-	 * 3. Define the request method and make a call to the client
-	 *    i.e client.get(apiUrl, params, handler)
-	 *    i.e client.post(apiUrl, params, handler)
-	 */
+
+
+
 }

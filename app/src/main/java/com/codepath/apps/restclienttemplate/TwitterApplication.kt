@@ -17,15 +17,15 @@ import com.facebook.stetho.Stetho
 */
 class TwitterApplication : Application() {
 
-    var myDatabase: MyDatabase? = null
+    var appDatabase: AppDatabase? = null
 
     override fun onCreate() {
         super.onCreate()
         // when upgrading versions, kill the original tables by using
         // fallbackToDestructiveMigration()
-        myDatabase = Room.databaseBuilder(
-            this, MyDatabase::class.java,
-            MyDatabase.NAME
+        appDatabase = Room.databaseBuilder(
+            this, AppDatabase::class.java,
+            AppDatabase.NAME
         ).fallbackToDestructiveMigration().build()
 
         // use chrome://inspect to inspect your SQL database

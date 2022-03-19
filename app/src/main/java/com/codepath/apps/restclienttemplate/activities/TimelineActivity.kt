@@ -1,11 +1,18 @@
-package com.codepath.apps.restclienttemplate
+package com.codepath.apps.restclienttemplate.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.codepath.apps.restclienttemplate.R
+import com.codepath.apps.restclienttemplate.TwitterApplication
+import com.codepath.apps.restclienttemplate.TwitterClient
 import com.codepath.apps.restclienttemplate.models.Tweet
 import com.codepath.apps.restclienttemplate.models.adapters.EndlessRecyclerViewScrollListener
 import com.codepath.apps.restclienttemplate.models.adapters.RecyclerAdapter
@@ -108,5 +115,16 @@ class TimelineActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.compose)
+            startActivity(Intent(this, ComposeActivity::class.java))
+        return true
     }
 }
